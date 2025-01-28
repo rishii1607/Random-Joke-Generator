@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tell Me Joke</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+          <div class="content">
+            <h1>Random Joke Generator Using jokeapi</h1>
+             <span id="category"></span> 
+            <p class="joke-text" id="joke"></p>
+            <button id="btn">Tell Me a Joke</button>
+          </div>
+        </div>
+      </div>
+
+    <!-- Script -->
+  <script type="text/javascript">
+const jokeContainer = document.getElementById("joke");
+const category = document.getElementById("category");
+
+const btn = document.getElementById("btn");
+const url = "https://v2.jokeapi.dev/joke/Any?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=single";
+
+let getJoke = () => {
+    fetch(url)
+    .then(data => data.json())
+    .then(item =>{
+        jokeContainer.textContent = `${item.joke}`;
+        category.textContent = `category: ${item.category}`;
+    });
+}
+btn.addEventListener("click",getJoke);
+getJoke();
+  </script>
+</body>
+</html>
